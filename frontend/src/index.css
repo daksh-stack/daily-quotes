@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* Subtle orbital float for satellite */
+@keyframes orbitFloat {
+  0% { transform: translate(-50%, -50%) rotate(0deg) translateX(22vw) rotate(0deg); }
+  25% { transform: translate(-50%, -50%) rotate(90deg) translateX(22vw) rotate(-90deg); }
+  50% { transform: translate(-50%, -50%) rotate(180deg) translateX(22vw) rotate(-180deg); }
+  75% { transform: translate(-50%, -50%) rotate(270deg) translateX(22vw) rotate(-270deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(22vw) rotate(-360deg); }
+}
+
+.satellite-orbit {
+  animation: orbitFloat 36s linear infinite;
+}
+
+/* Smooth asteroid drift */
+@keyframes asteroidDrift {
+  0% { transform: translate(var(--x0), var(--y0)) rotate(0deg) scale(1); opacity: 0; }
+  6% { opacity: 0.9; }
+  50% { transform: translate(calc((var(--x0) + var(--x1)) / 2), calc((var(--y0) + var(--y1)) / 2)) rotate(calc(var(--spin) / 2)) scale(1.08); }
+  94% { opacity: 0.9; }
+  100% { transform: translate(var(--x1), var(--y1)) rotate(var(--spin)) scale(1); opacity: 0; }
+}
+
+.asteroid {
+  position: absolute;
+  left: 0; top: 0;
+  width: var(--size); height: var(--size);
+  transform: translate(var(--x0), var(--y0));
+  border-radius: 9999px;
+  animation: asteroidDrift var(--duration) ease-in-out var(--delay) infinite alternate;
+}
